@@ -60,7 +60,7 @@ query getLocation{
     id
     name
     desc
-	  lat
+    lat
     lng
   }
 }
