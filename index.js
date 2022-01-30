@@ -2,15 +2,30 @@ const { ApolloServer, gql } = require("apollo-server");
 const {
   ApolloServerPluginLandingPageGraphQLPlayground,
 } = require("apollo-server-core");
-
 const { events, locations, users, participants } = require("./data");
+const {
+  getCreatedData,
+  getUpdatedData,
+  getDeletedData,
+  getCountOfAllDeletedData,
+} = require("./utils");
 
 const typeDefs = gql`
   type User {
-    id: Int!
+    id: ID!
     username: String!
     email: String!
     events: [Event!]!
+  }
+
+  input CreateUserInput {
+    username: String!
+    email: String!
+  }
+
+  input UpdateUserInput {
+    username: String
+    email: String
   }
 
   type Event {
@@ -43,6 +58,10 @@ const typeDefs = gql`
     event: Event!
   }
 
+  type DeleteAllOutput {
+    count: Int!
+  }
+
   type Query {
     #User
     users: [User!]!
@@ -60,6 +79,14 @@ const typeDefs = gql`
     participants: [Participant!]!
     participant(id: Int!): Participant!
   }
+
+  type Mutation {
+    #User
+    createUser(data: CreateUserInput): User!
+    updateUser(id: ID!, data: UpdateUserInput): User!
+    deleteUser(id: ID!): User!
+    deleteAllUsers: DeleteAllOutput!
+  }
 `;
 
 const resolvers = {
@@ -75,7 +102,20 @@ const resolvers = {
     participant: (parent, args) =>
       participants.find((participant) => participant.id === args.id),
   },
-
+  Mutation: {
+    createUser: (parent, { data }) => getCreatedData(users, data),
+    updateUser: (parent, { id, data }) => {
+      const updatedUser = getUpdatedData(users, data, id);
+      if (!updatedUser) throw new Error("User not found!");
+      return updatedUser;
+    },
+    deleteUser: (parent, { id }) => {
+      const deletedUser = getDeletedData(users, id);
+      if (!deletedUser) throw new Error("User not found!");
+      return deletedUser;
+    },
+    deleteAllUsers: () => getCountOfAllDeletedData(users),
+  },
   User: {
     events: (parent, args) =>
       events.filter((event) => event.user_id === parent.id),

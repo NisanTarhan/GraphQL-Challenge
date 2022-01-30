@@ -16,6 +16,7 @@
   "dependencies": {
     "apollo-server": "^3.6.2",
     "apollo-server-core": "^3.6.2",
-    "graphql": "^16.2.0"
+    "graphql": "^16.2.0",
+    "nanoid": "^3.2.0"
   }
 }
