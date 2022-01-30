@@ -60,7 +60,7 @@ query getLocation{
     id
     name
     desc
-	  lat
+    lat
     lng
   }
 }
@@ -82,7 +82,7 @@ query getParticipant {
 }
 ```
 
-To get a list from the data.
+To get a list from the data:
 ```js
 query getAllUsers {
   users {
