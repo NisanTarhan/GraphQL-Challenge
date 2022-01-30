@@ -140,3 +140,136 @@ query getAllParticipants {
   }
 }
 ```
+
+# Mutation Samples
+
+```js
+mutation addUser {
+  createUser(data: { username: "Nisan", email: "nisan_tarhan@hotmail.com" }) {
+    id
+    username
+    email
+  }
+}
+
+mutation updateUser {
+  updateUser(id: "1", data: { username: "Ercan" }) {
+    id
+    username
+    email
+  }
+}
+
+mutation deleteUser {
+  deleteUser(id: "1") {
+    id
+    username
+    email
+  }
+}
+
+mutation deleteAllUsers {
+  deleteAllUsers {
+    count
+  }
+}
+
+mutation addEvent {
+  createEvent(
+    data: {
+      title: "Yeni Event"
+      location_id: "1"
+      user_id: "1"
+    }
+  ) {
+    id
+    title
+  }
+}
+
+mutation updateEvent {
+  updateEvent(
+    id: "1"
+    data: { title: "Event Güncellendi!", location_id: "1", user_id: "1" }
+  ) {
+    id
+    title
+  }
+}
+
+mutation deleteEvent {
+  deleteEvent(id: "1") {
+    id
+    title
+  }
+}
+
+mutation deleteAllEvents {
+  deleteAllEvents {
+    count
+  }
+}
+
+mutation addLocation {
+  createLocation(data: { name: "Yeni Lokasyon", lat: 0.6 }) {
+    id
+    name
+    lat
+  }
+}
+
+mutation updateLocation {
+  updateLocation(
+    id: "1"
+    data: { name: "Lokasyon Güncellendi!" }
+  ) {
+    id
+    name
+    lat
+  }
+}
+
+mutation deleteLocation {
+  deleteLocation(id: "1") {
+    id
+    name
+    lat
+  }
+}
+
+mutation deleteAllLocations {
+  deleteAllLocations {
+    count
+  }
+}
+
+mutation addParticipant {
+  createParticipant(data: { user_id: "1", event_id: "1" }) {
+ 		event_id
+    user_id
+  }
+}
+
+mutation updateParticipant {
+  updateParticipant(
+    id: "1"
+    data: { user_id: "1", event_id:"1"}
+  ) {
+    event_id
+    user_id
+  }
+}
+
+mutation deleteParticipant {
+  deleteParticipant(id: "1") {
+    event_id
+    user_id
+  }
+}
+
+mutation deleteAllParticipants {
+  deleteAllParticipants {
+    count
+  }
+}
+```

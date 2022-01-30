@@ -10,7 +10,12 @@ const getCreatedData = (data, createdData) => {
 };
 
 const getUpdatedData = (data, updatedData, id) => {
-  const index = data.findIndex((item) => item.id === id);
+  console.log(
+    "🚀 ~ file: index.js ~ line 13 ~ getUpdatedData ~ updatedData",
+    updatedData
+  );
+  const index = data.findIndex((item) => item.id == id);
+  console.log("🚀 ~ file: index.js ~ line 16 ~ getUpdatedData ~ index", index);
   if (index === -1) return null;
   data[index] = {
     ...data[index],
@@ -20,7 +25,7 @@ const getUpdatedData = (data, updatedData, id) => {
 };
 
 const getDeletedData = (data, id) => {
-  const index = data.findIndex((item) => item.id === id);
+  const index = data.findIndex((item) => item.id == id);
   if (index === -1) return null;
   const deletedItem = data[index];
   data.splice(index, 1);
