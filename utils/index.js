@@ -1,21 +1,18 @@
-const { nanoid } = require("nanoid");
+import { nanoid } from "nanoid";
 
-const getCreatedData = (data, createdData) => {
-  const newUser = {
+const getCreatedData = (data, createdData, subscriptionData) => {
+  const { key, fieldName, pubsub } = subscriptionData;
+  const newData = {
     id: nanoid(),
     ...createdData,
   };
-  data.push(newUser);
-  return newUser;
+  data.push(newData);
+  pubsub.publish(key, { [fieldName]: newData });
+  return newData;
 };
 
 const getUpdatedData = (data, updatedData, id) => {
-  console.log(
-    "🚀 ~ file: index.js ~ line 13 ~ getUpdatedData ~ updatedData",
-    updatedData
-  );
   const index = data.findIndex((item) => item.id == id);
-  console.log("🚀 ~ file: index.js ~ line 16 ~ getUpdatedData ~ index", index);
   if (index === -1) return null;
   data[index] = {
     ...data[index],
@@ -40,7 +37,7 @@ const getCountOfAllDeletedData = (data) => {
   };
 };
 
-module.exports = {
+export {
   getCreatedData,
   getUpdatedData,
   getDeletedData,
