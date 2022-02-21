@@ -273,3 +273,29 @@ mutation deleteAllParticipants {
   }
 }
 ```
+
+# Subscription Samples
+
+```
+subscription UserCreate {
+  userCreated {
+    id
+    username
+    email
+  }
+}
+
+subscription EventCreate {
+  eventCreated {
+    id
+    title
+  }
+}
+
+subscription ParticipantCreate {
+  participantAdded {
+    id
+ 		user_id
+  }
+}
+```
