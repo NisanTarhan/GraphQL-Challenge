@@ -276,7 +276,7 @@ mutation deleteAllParticipants {
 
 # Subscription Samples
 
-```
+```js
 subscription UserCreate {
   userCreated {
     id
@@ -295,7 +295,7 @@ subscription EventCreate {
 subscription ParticipantCreate {
   participantAdded {
     id
- 		user_id
+    user_id
   }
 }
 ```
