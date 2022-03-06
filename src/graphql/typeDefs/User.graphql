@@ -1,0 +1,32 @@
+  type User {
+    id: ID!
+    username: String!
+    email: String!
+    events: [Event!]!
+  }
+
+  input CreateUserInput {
+    username: String!
+    email: String!
+  }
+
+  input UpdateUserInput {
+    username: String
+    email: String
+  }
+
+  type Query {
+    users: [User!]!
+    user(id: ID!): User!
+  }
+
+  type Mutation {
+    createUser(data: CreateUserInput): User!
+    updateUser(id: ID!, data: UpdateUserInput): User!
+    deleteUser(id: ID!): User!
+    deleteAllUsers: DeleteAllOutput!
+  }
+
+  type Subscription {
+    userCreated: User!
+  }

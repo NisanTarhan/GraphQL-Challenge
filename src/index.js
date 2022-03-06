@@ -6,8 +6,24 @@ import { execute, subscribe } from "graphql";
 import { SubscriptionServer } from "subscriptions-transport-ws";
 import { makeExecutableSchema } from "@graphql-tools/schema";
 import express from "express";
-import resolvers from "./resolvers.js";
-import typeDefs from "./typeDefs.js";
+import {
+  Query,
+  Mutation,
+  Subscription,
+  User,
+  Event,
+  Participant,
+} from "@resolvers";
+import typeDefs from '@typeDefs';
+
+const resolvers = {
+  Query,
+  Mutation,
+  Subscription,
+  User,
+  Event,
+  Participant,
+}
 
 async function startApolloServer(typeDefs, resolvers) {
   const app = express();

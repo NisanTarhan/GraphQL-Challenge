@@ -1,13 +1,16 @@
 import { nanoid } from "nanoid";
 
 const getCreatedData = (data, createdData, subscriptionData) => {
-  const { key, fieldName, pubsub } = subscriptionData;
+  const { key, fieldName, pubsub } = subscriptionData || {};
   const newData = {
     id: nanoid(),
     ...createdData,
   };
+
   data.push(newData);
-  pubsub.publish(key, { [fieldName]: newData });
+  if (key && fieldName && pubsub) {
+    pubsub.publish(key, { [fieldName]: newData });
+  }
   return newData;
 };
 

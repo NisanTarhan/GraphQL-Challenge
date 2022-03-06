@@ -260,6 +260,10 @@ export const events = [
     location_id: 12,
     user_id: 12,
   },
+
+
+
+
 ];
 
 export const locations = [
@@ -819,4 +823,15 @@ export const participants = [
     user_id: 12,
     event_id: 12,
   },
+
+
+
+
+
+
+
+
+
+
+
 ];
